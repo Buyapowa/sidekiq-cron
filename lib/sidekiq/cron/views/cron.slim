@@ -4,16 +4,16 @@ header.row
 
   .span.col-sm-7.pull-right style="margin-top: 20px; margin-bottom: 10px;"
     - if @cron_jobs.size > 0
-      form.pull-right action="#{root_path}cron/__all__/delete" method="post"
+      form.pull-right action="#{root_path}old_cron/__all__/delete" method="post"
         = csrf_tag if respond_to?(:csrf_tag)
         input.btn.btn-small.pull-left.btn-danger type="submit" name="enque" value="#{t('DeleteAll')}" data-confirm="#{t('AreYouSureDeleteCronJobs')}"
-      form.pull-right action="#{root_path}cron/__all__/disable" method="post"
+      form.pull-right action="#{root_path}old_cron/__all__/disable" method="post"
         = csrf_tag if respond_to?(:csrf_tag)
         input.btn.btn-small.pull-left type="submit" name="enque" value="#{t('DisableAll')}"
-      form.pull-right action="#{root_path}cron/__all__/enable" method="post"
+      form.pull-right action="#{root_path}old_cron/__all__/enable" method="post"
         = csrf_tag if respond_to?(:csrf_tag)
         input.btn.btn-small.pull-left type="submit" name="enque" value="#{t('EnableAll')}"
-      form.pull-right action="#{root_path}cron/__all__/enque" method="post"
+      form.pull-right action="#{root_path}old_cron/__all__/enque" method="post"
         = csrf_tag if respond_to?(:csrf_tag)
         input.btn.btn-small.pull-left type="submit" name="enque" value="#{t('EnqueueAll')}" data-confirm="#{t('AreYouSureEnqueueCronJobs')}"
 
@@ -34,7 +34,7 @@ header.row
       tr
         td[style="#{style}"]= job.status
         td[style="#{style}"]
-          a href="#{root_path}cron/#{CGI.escape(job.name).gsub('+', '%20')}"
+          a href="#{root_path}old_cron/#{CGI.escape(job.name).gsub('+', '%20')}"
             b = job.name
           hr style="margin:3px;border:0;"
           small
@@ -50,20 +50,20 @@ header.row
         td[style="#{style}"]== job.last_enqueue_time ? relative_time(job.last_enqueue_time) : "-"
         td[style="#{style}"]
           -if job.status == 'enabled'
-            form action="#{root_path}cron/#{CGI.escape(job.name).gsub('+', '%20')}/enque" method="post"
+            form action="#{root_path}old_cron/#{CGI.escape(job.name).gsub('+', '%20')}/enque" method="post"
               = csrf_tag if respond_to?(:csrf_tag)
               input.btn.btn-small.pull-left type="submit" name="enque" value="#{t('EnqueueNow')}"
-            form action="#{root_path}cron/#{CGI.escape(job.name).gsub('+', '%20')}/disable" method="post"
+            form action="#{root_path}old_cron/#{CGI.escape(job.name).gsub('+', '%20')}/disable" method="post"
               = csrf_tag if respond_to?(:csrf_tag)
               input.btn.btn-small.pull-left type="submit" name="disable" value="#{t('Disable')}"
           -else
-            form action="#{root_path}cron/#{CGI.escape(job.name).gsub('+', '%20')}/enque" method="post"
+            form action="#{root_path}old_cron/#{CGI.escape(job.name).gsub('+', '%20')}/enque" method="post"
               = csrf_tag if respond_to?(:csrf_tag)
               input.btn.btn-small.pull-left type="submit" name="enque" value="#{t('EnqueueNow')}" data-confirm="#{t('AreYouSureEnqueueCronJob', :job => job.name)}"
-            form action="#{root_path}cron/#{CGI.escape(job.name).gsub('+', '%20')}/enable" method="post"
+            form action="#{root_path}old_cron/#{CGI.escape(job.name).gsub('+', '%20')}/enable" method="post"
               = csrf_tag if respond_to?(:csrf_tag)
               input.btn.btn-small.pull-left type="submit" name="enable" value="#{t('Enable')}"
-            form action="#{root_path}cron/#{CGI.escape(job.name).gsub('+', '%20')}/delete" method="post"
+            form action="#{root_path}old_cron/#{CGI.escape(job.name).gsub('+', '%20')}/delete" method="post"
               = csrf_tag if respond_to?(:csrf_tag)
               input.btn.btn-danger.btn-small type="submit" name="delete" value="#{t('Delete')}" data-confirm="#{t('AreYouSureDeleteCronJob', :job => job.name)}"
 
