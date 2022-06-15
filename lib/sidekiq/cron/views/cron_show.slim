@@ -4,7 +4,7 @@ header.row
       = "#{t('Cron')} #{t('Job')}"
       small= @job.name
   .span.col-sm-7.pull-right style=("margin-top: 20px; margin-bottom: 10px;")
-    - cron_job_path = "#{root_path}cron/#{CGI.escape(@job.name).gsub('+', '%20')}"
+    - cron_job_path = "#{root_path}old_cron/#{CGI.escape(@job.name).gsub('+', '%20')}"
     form.pull-right action="#{cron_job_path}/enque?redirect=#{cron_job_path}" method="post"
       = csrf_tag if respond_to?(:csrf_tag)
       input.btn.btn-small.pull-left data-confirm="#{t('AreYouSureEnqueueCronJob', :job => @job.name)}" name="enque" type="submit" value="#{t('EnqueueNow')}"
